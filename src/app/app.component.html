@@ -8,27 +8,60 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <div class="min-h-screen flex items-center justify-center bg-gray-100">
-  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-    <h2 class="text-2xl font-bold mb-6 text-center">Formulario para calculo de intereses</h2>
-    <form (ngSubmit)="onSubmit()">
-      <div class="mb-4">
-        <label for="startDate" class="block text-gray-700 font-bold mb-2">Fecha de Inicio</label>
-        <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-      </div>
-      <div class="mb-4">
-        <label for="endDate" class="block text-gray-700 font-bold mb-2">Fecha de Fin</label>
-        <input type="date" id="endDate" name="endDate" [(ngModel)]="endDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-      </div>
-      <div class="mb-4">
-        <label for="price" class="block text-gray-700 font-bold mb-2">Precio mes canon de arrendamiento</label>
-        <input type="number" id="price" name="price" [(ngModel)]="price" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-      </div>
-      <div class="flex justify-center">
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Calcular</button>
-      </div>
-    </form>
+  <div>
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl">
+      <h2 class="text-2xl font-bold mb-6 text-center">Formulario para cálculo de intereses</h2>
+      <form (ngSubmit)="onSubmit()">
+        <div class="grid grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-bold mb-4">Seleccione Meses a pagar</h3>
+            <ng-container *ngFor="let month of months; let i = index">
+              <div *ngIf="i <= currentMonth" class="mb-2">
+                <input type="checkbox" id="month{{i}}" name="months" [(ngModel)]="selectedMonths[i]">
+                <label for="month{{i}}" class="ml-2 text-gray-700">{{ month }}</label>
+              </div>
+            </ng-container>
+          </div>
+          <div>
+            <div class="mb-4">
+              <label for="paymentDate" class="text-xl font-bold mb-4">Fecha de Pago</label>
+              <input type="date" id="paymentDate" name="paymentDate" [(ngModel)]="paymentDate"
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required>
+            </div>
+            <div class="mb-4">
+              <label for="value" class="text-xl font-bold mb-4">Valor Canón de Arrendamiento</label>
+              <input type="number" id="value" name="value" [(ngModel)]="value"
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required>
+            </div>
+            <div class="flex justify-center">
+              <button type="submit"
+                class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Calcular</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl mt-6">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr>
+            <th class="text-xl font-bold mb-4">Mes</th>
+            <th class="text-xl font-bold mb-4">Interés </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let interest of totalInterestArray; let i = index">
+            <td class="border-b px-4 py-2">{{ selectedMonthsName[i] }}</td>
+            <td class="border-b px-4 py-2">{{ interest | number: '1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
+
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
