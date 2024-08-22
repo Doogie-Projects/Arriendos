@@ -42,9 +42,12 @@ export class AppComponent {
     let totalInterest = 0;
     let selectedMonthsName = [];
     const firstTrueIndex = this.selectedMonths.findIndex(month => month === true);
-    // console.log('First True:', firstTrueIndex);
-    // let currentDate = new Date(this.startDate);
-
+    const paymentDateString: string = this.paymentDate;
+    const dateParts: string[] = paymentDateString.split('-');
+    const dayPart: string = dateParts[2];
+    const lastNumber: number = parseInt(dayPart, 10);
+    // console.log('Last Number:', lastNumber);
+    
     for (let i = 0; i < this.selectedMonths.length; i++) {
       if (this.selectedMonths[i]) {
         const month = this.months[i];
@@ -62,7 +65,7 @@ export class AppComponent {
         }
 
         if (this.selectedMonths[i] === true && isLastTrue) {
-          daysInMonth = this.currentDay-1;
+          daysInMonth = lastNumber;
         }
         let interest = (this.value * interestRate * daysInMonth) / (100 * 360);
         totalInterest += interest * (i - firstTrueIndex + 1);
@@ -89,13 +92,11 @@ export class AppComponent {
     console.log('3. Meses seleccionados:', selectedMonthsName);
     console.log('4. Fecha de pago:', this.paymentDate);
     console.log('5. Valor:', this.value);
-
-    // const { totalInterest, totalInterestArray, selectedMonthsName } = this.calculateSimpleInterest();
     console.log('6. Interés simple:', totalInterest);
     this.totalInterestArray = totalInterestArray;
     this.selectedMonthsName = selectedMonthsName;
-    // const { totalInterest, totalInterestArray } = this.calculateSimpleInterest();
     console.log('7. Array:', totalInterestArray)
+    console.log('8. paymentDate:', this.paymentDate);
   }
 
 }
