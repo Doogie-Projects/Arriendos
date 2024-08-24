@@ -9,7 +9,9 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FormsModule, CommonModule]
 })
+
 export class AppComponent {
+
   totalInterestArray: number[] = [];
   months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   currentDate = new Date();
@@ -29,7 +31,6 @@ export class AppComponent {
     { month: 'Julio', rate: 29.49 },
     { month: 'Agosto', rate: 29.21 },
   ];
-
 
   constructor() {
     const today = new Date();
