@@ -34,6 +34,7 @@ export class AppComponent {
     { month: 'Julio', rate: 29.49 },
     { month: 'Agosto', rate: 29.21 },
     { month: 'Septiembre', rate: 28.85 },
+    { month: 'Octubre', rate: 28.85 },
   ];
 
   constructor() {
