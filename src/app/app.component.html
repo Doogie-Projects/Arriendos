@@ -44,25 +44,18 @@
       </form>
     </div>
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl mt-6">
-      <table class="w-full text-left border-collapse">
-        <thead>
-          <tr>
-            <th class="text-xl font-bold mb-4">Mes</th>
-            <th class="text-xl font-bold mb-4">Interés </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let interest of resultArray; let i = index">
-            <td class="border-b px-4 py-2">{{ selectedMonthsName[i] }}</td>
-            <td class="border-b px-4 py-2">{{ interest | number: '1.2-2' }}</td>
-          </tr>
-          <tr>
-            <td class="border-b px-4 py-2 font-bold">Total Interés</td>
-            <td class="border-b px-4 py-2 font-bold">{{ totalInterest | number: '1.2-2' }}</td>
-          </tr>
-        </tbody>
-      </table>
-      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Tarjetas para los intereses -->
+        <div *ngFor="let interest of resultArray; let i = index" class="bg-gray-100 p-4 rounded-lg shadow-md">
+          <h3 class="text-lg font-semibold mb-2">{{ selectedMonthsName[i] }}</h3>
+          <p class="text-xl font-bold">{{ interest | number: '1.0-0' }}</p>
+        </div>
+        <!-- Tarjeta para el total de interés -->
+        <div class="bg-blue-200 p-4 rounded-lg shadow-md md:col-span-2">
+          <h3 class="text-lg font-semibold">Total Interés</h3>
+          <p class="text-xl font-bold">{{ totalInterest | number: '1.0-0' }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
